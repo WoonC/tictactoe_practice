@@ -18,7 +18,7 @@ def player_input():
         if marker == 'O':
             return 'O','X'
         else:
-            print('enter the correct one dumb fck')
+            print('X or O only')
 
 #Changing board markers to X or O
 def place_marker(board,marker,position):
