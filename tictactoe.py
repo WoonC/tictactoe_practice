@@ -1,11 +1,11 @@
-
+import random
 #Show Board Structure
 def display_board(board):
     print(board[7] + " | " + board[8] + " | " + board[9])
     print(board[4] + " | " + board[5] + " | " + board[6])
     print(board[1] + " | " + board[2] + " | " + board[3])
 
-test_board = ['#','1','2','3','4','5','6','7','8','9']
+test_board = ['#','X','','X','O','X','O','X','O','X']
 
 #Take in player input
 def player_input():
@@ -34,5 +34,41 @@ def win_check(board,mark):
             (board[7] == mark and board[5] == mark and board[3] == mark) or  # diagonal
             (board[9] == mark and board[5] == mark and board[1] == mark))  # diagonal
 
-print(win_check(test_board, 'X'))
-print(test_board)
+def choose_first():
+    if random.randint(0,1) == 0:
+        return 'Player 1 will go first'
+    else:
+        return 'Player 2 will go first'
+
+def space_check(board,position):
+    return board[position] == ''
+
+def full_board_check(board):
+    for i in range(1,10):
+        if board[i] == '':
+            return False
+    return True
+
+def player_choice(board):
+    position = []
+    while position not in [1,2,3,4,5,6,7,8,9] or not space_check(board,position):
+        position = int(input('Please enter a number between 1-9: '))
+
+    return position
+
+def replay():
+    response = input('Y to play again, N to stop playing: ').upper()
+    return response == 'Y'
+
+#### RUNNING THE GAME ####
+while True:
+    the_board = ['']*9
+
+
+
+
+
+
+    if not replay():
+        break
+
