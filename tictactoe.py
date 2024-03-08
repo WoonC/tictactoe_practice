@@ -1,9 +1,9 @@
 import random
 #Show Board Structure
 def display_board(board):
-    print(board[7] + " | " + board[8] + " | " + board[9])
-    print(board[4] + " | " + board[5] + " | " + board[6])
-    print(board[1] + " | " + board[2] + " | " + board[3])
+    print(board[7] + "  |  " + board[8] + "  |  " + board[9])
+    print(board[4] + "  |  " + board[5] + "  |  " + board[6])
+    print(board[1] + "  |  " + board[2] + "  |  x" + board[3])
 
 test_board = ['#','X','','X','O','X','O','X','O','X']
 
@@ -36,9 +36,9 @@ def win_check(board,mark):
 
 def choose_first():
     if random.randint(0,1) == 0:
-        return 'Player 1 will go first'
+        return 'Player 1'
     else:
-        return 'Player 2 will go first'
+        return 'Player 2'
 
 def space_check(board,position):
     return board[position] == ''
@@ -62,7 +62,57 @@ def replay():
 
 #### RUNNING THE GAME ####
 while True:
-    the_board = ['']*9
+    the_board = ['']*10
+    player1_marker, player2_marker = player_input()
+
+    turn = choose_first()
+    print(turn + " will go first")
+
+    play_game = input('Ready to play the game? Y or N: ').upper()
+    if play_game == 'Y':
+        game_on = True
+    else:
+        game_on = False
+
+    ## During game play
+    while game_on:
+        if turn == 'Player 1':
+            display_board(the_board)
+            position = player_choice(the_board)
+            place_marker(the_board,player1_marker, position)
+
+            if win_check(the_board,player1_marker):
+                print('Player 1 has won')
+                game_on = False
+
+            else:
+                if full_board_check(the_board):
+                    display_board(the_board)
+                    print('Tie')
+                    game_on = False
+                else:
+                    turn = 'Player 2'
+
+        else:
+            display_board(the_board)
+            position = player_choice(the_board)
+            place_marker(the_board, player2_marker, position)
+
+            if win_check(the_board,player2_marker):
+                print('Player 2 has won')
+                game_on = False
+
+            else:
+                if full_board_check(the_board):
+                    print('Tie')
+                    game_on = False
+                else:
+                    turn = 'Player 1'
+
+    if not replay():
+        break
+
+
 
 
 
