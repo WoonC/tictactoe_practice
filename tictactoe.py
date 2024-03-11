@@ -112,13 +112,3 @@ while True:
     if not replay():
         break
 
-
-
-
-
-
-
-
-    if not replay():
-        break
-
